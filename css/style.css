@@ -1,0 +1,275 @@
+/* MS File Manager — premium dark theme for 240x320 KaiOS. ES5-era CSS only. */
+:root {
+  --bg: #07111F;
+  --bg2: #0B192B;
+  --card: #0D2035;
+  --blue: #0878F9;
+  --sel: #0866E8;
+  --text: #F4F8FF;
+  --text2: #A9BCD2;
+  --folder: #FFB52E;
+  --img: #50C8F5;
+  --vid: #C06AF3;
+  --aud: #E86CB8;
+  --red: #FF4D61;
+  --green: #3ED598;
+  --border: #203B57;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 240px; height: 320px; overflow: hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: sans-serif;
+  font-size: 13px;
+  -moz-user-select: none;
+}
+.hidden { display: none !important; }
+svg { display: block; }
+
+#app { width: 240px; height: 320px; display: flex; flex-direction: column; background: var(--bg); }
+
+/* ---------- header (30px) ---------- */
+#hdr {
+  height: 30px; flex: 0 0 30px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 8px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+#hdr-ic { width: 20px; height: 20px; flex: 0 0 20px; }
+#hdr-ic svg { width: 20px; height: 20px; }
+#hdr-title {
+  font-size: 14px; font-weight: bold; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ---------- main / screens ---------- */
+#main { flex: 1 1 auto; overflow: hidden; position: relative; }
+.screen { height: 100%; overflow-y: auto; overflow-x: hidden; padding: 8px; position: relative; }
+.screen::-webkit-scrollbar { width: 0; }
+
+/* ---------- home: storage cards ---------- */
+.stor-card {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px; margin-bottom: 8px;
+}
+.stor-card.focused { background: var(--sel); border-color: var(--sel); }
+.stor-card.focused .stor-sub, .stor-card.focused .stor-name { color: #fff; }
+.stor-ic { width: 26px; height: 26px; flex: 0 0 26px; }
+.stor-ic svg { width: 26px; height: 26px; }
+.stor-mid { flex: 1 1 auto; min-width: 0; }
+.stor-name { font-size: 13px; font-weight: bold; }
+.stor-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.stor-bar { height: 5px; background: #13283f; border-radius: 3px; margin-top: 5px; overflow: hidden; }
+.stor-card.focused .stor-bar { background: rgba(255,255,255,.25); }
+.stor-fill { height: 100%; background: var(--blue); border-radius: 3px; }
+.stor-card.focused .stor-fill { background: #fff; }
+.stor-chev { width: 16px; height: 16px; flex: 0 0 16px; }
+.stor-chev svg { width: 16px; height: 16px; }
+
+/* ---------- home: category grid ---------- */
+#cat-grid {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;
+}
+.cat-tile {
+  width: 69px; /* (240-16-16)/3 */
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 4px 6px;
+  text-align: center;
+}
+.cat-tile.focused { background: var(--sel); border-color: var(--sel); }
+.cat-tile svg { width: 28px; height: 28px; margin: 0 auto 4px; }
+.cat-tile .t { font-size: 11px; color: var(--text2); }
+.cat-tile.focused .t { color: #fff; }
+
+/* ---------- quick rows (home bottom) ---------- */
+.qrow {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px; margin-bottom: 8px;
+}
+.qrow.focused { background: var(--sel); border-color: var(--sel); }
+.qrow svg { width: 20px; height: 20px; flex: 0 0 20px; }
+.qrow .t { font-size: 13px; }
+.qrow .chev { margin-left: auto; width: 16px; height: 16px; }
+.qrow .chev svg { width: 16px; height: 16px; }
+
+/* ---------- generic list rows ---------- */
+.list { display: flex; flex-direction: column; gap: 4px; }
+.row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  min-height: 44px;
+}
+.row.focused { background: var(--sel); border-color: var(--sel); }
+.row .ric { width: 28px; height: 28px; flex: 0 0 28px; }
+.row .ric svg { width: 28px; height: 28px; }
+.row .rmid { flex: 1 1 auto; min-width: 0; }
+.row .rn {
+  font-size: 13px; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.row .rs { font-size: 11px; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row.focused .rs { color: #dbe9ff; }
+.row .rmeta { font-size: 11px; color: var(--text2); flex: 0 0 auto; }
+.row.focused .rmeta { color: #dbe9ff; }
+.row .rchev { width: 16px; height: 16px; flex: 0 0 16px; }
+.row .rchev svg { width: 16px; height: 16px; }
+.row .rval { font-size: 12px; color: var(--text2); }
+.row.focused .rval { color: #fff; }
+.empty-note {
+  text-align: center; color: var(--text2); font-size: 12px;
+  padding: 24px 16px; line-height: 1.5;
+}
+
+/* ---------- popup menu (screen 4) ---------- */
+.overlay {
+  position: absolute; left: 0; top: 0; width: 240px; height: 292px;
+  background: rgba(3, 8, 16, .72);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 20;
+}
+#menu-box {
+  width: 200px; max-height: 264px; overflow-y: auto;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px;
+}
+#menu-box::-webkit-scrollbar { width: 0; }
+#menu-title {
+  text-align: center; font-size: 13px; font-weight: bold;
+  padding: 8px 4px; color: var(--text);
+  border-bottom: 1px solid var(--border); margin-bottom: 4px;
+}
+.mi {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px; border-radius: 7px; font-size: 13px;
+}
+.mi svg { width: 20px; height: 20px; flex: 0 0 20px; }
+.mi.focused { background: var(--sel); }
+.mi.disabled { opacity: .38; }
+.mi-sep { height: 1px; background: var(--border); margin: 4px 8px; }
+.mi .why { font-size: 10px; color: var(--text2); margin-left: auto; }
+
+/* ---------- dialog ---------- */
+#dlg-box {
+  width: 208px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px;
+}
+#dlg-title { font-size: 13px; font-weight: bold; margin-bottom: 8px; text-align: center; }
+#dlg-msg { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 10px; word-wrap: break-word; }
+#dlg-input {
+  width: 100%; padding: 7px 8px; margin-bottom: 10px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); font-size: 13px; outline: none;
+}
+#dlg-input:focus { border-color: var(--blue); }
+#dlg-btns { display: flex; gap: 8px; }
+.dbtn {
+  flex: 1; text-align: center; padding: 8px 4px;
+  border-radius: 7px; font-size: 12px; font-weight: bold;
+  background: var(--card); border: 1px solid var(--border); color: var(--text);
+}
+.dbtn.focused { background: var(--sel); border-color: var(--sel); color: #fff; }
+.dbtn.danger.focused { background: var(--red); border-color: var(--red); }
+
+/* ---------- busy ---------- */
+#busy-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 20px; text-align: center;
+}
+#busy-spin {
+  width: 26px; height: 26px; margin: 0 auto 10px;
+  border: 3px solid var(--border); border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#busy-msg { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* ---------- toast ---------- */
+#toast {
+  position: absolute; left: 20px; right: 20px; bottom: 40px;
+  background: #12283f; border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px;
+  font-size: 12px; text-align: center; color: var(--text);
+  z-index: 30; line-height: 1.4;
+}
+
+/* ---------- properties (screen 5) ---------- */
+#props-body { display: flex; flex-direction: column; gap: 4px; }
+.prop-thumb {
+  width: 120px; height: 90px; margin: 4px auto 8px;
+  border-radius: 8px; border: 1px solid var(--border);
+  object-fit: cover; background: var(--card);
+  display: block;
+}
+.prop-ic { width: 56px; height: 56px; margin: 4px auto 8px; }
+.prop-ic svg { width: 56px; height: 56px; }
+.prow { display: flex; gap: 8px; padding: 6px 8px; font-size: 12px; }
+.prow .k { flex: 0 0 64px; color: var(--blue); font-weight: bold; }
+.prow .v { flex: 1 1 auto; color: var(--text); word-wrap: break-word; min-width: 0; }
+
+/* ---------- picker crumb ---------- */
+.crumb {
+  font-size: 12px; color: var(--text2);
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 8px; margin-bottom: 8px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.crumb b { color: var(--text); }
+
+/* ---------- search ---------- */
+#search-bar {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 8px; margin-bottom: 8px;
+}
+#search-bar .sic { width: 18px; height: 18px; flex: 0 0 18px; }
+#search-bar .sic svg { width: 18px; height: 18px; }
+#search-input {
+  flex: 1 1 auto; min-width: 0;
+  background: transparent; border: none; outline: none;
+  color: var(--text); font-size: 13px;
+}
+#search-clear {
+  width: 22px; height: 22px; flex: 0 0 22px;
+  background: transparent; border: none; padding: 0;
+}
+#search-clear svg { width: 18px; height: 18px; }
+.hint { font-size: 11px; color: var(--text2); margin-bottom: 8px; line-height: 1.5; }
+
+/* ---------- text viewer ---------- */
+#text-body {
+  font-size: 12px; line-height: 1.6; color: var(--text);
+  white-space: pre-wrap; word-wrap: break-word;
+  font-family: monospace;
+}
+
+/* ---------- settings rows reuse .row ---------- */
+
+/* ---------- softkeys (28px, app-drawn like MS Gallery) ---------- */
+#softkeys {
+  flex: 0 0 28px; height: 28px;
+  display: flex;
+  background: linear-gradient(180deg, #10203c, #0c1830);
+  border-top: 1px solid var(--border);
+  font-size: 12px; font-weight: bold; color: var(--text2);
+}
+#softkeys span {
+  flex: 1; display: flex; align-items: center;
+  overflow: hidden; white-space: nowrap;
+  padding: 0 8px;
+}
+#sk-l { justify-content: flex-start; }
+#sk-c { justify-content: center; color: var(--text); }
+#sk-r { justify-content: flex-end; }
